@@ -12,8 +12,15 @@ mongoose
 	.catch(e => console.log('DB error', e));
 
 const fruitSchema = new mongoose.Schema({
-	name: String,
-	rating: Number,
+	name: {
+		type: String,
+		required: [true, 'Please check your data entry. No name specified']
+	},
+	rating: {
+		type: Number,
+		min: 1,
+		max: 10
+	},
 	review: String
 });
 
@@ -22,12 +29,11 @@ const Fruit = mongoose.model('Fruit', fruitSchema);
 
 //fruit document
 const fruit = new Fruit({
-	name: 'Apple',
-	rating: 7,
-	review: 'Pretty solid as a fruit.'
+	rating: 10,
+	review: 'Peaches are yummy'
 });
 
-// fruit.save();
+fruit.save();
 
 const personSchema = new mongoose.Schema({
 	name: String,
@@ -43,23 +49,23 @@ const person = new Person({
 
 // person.save();
 
-const kiwi = new Fruit({
-	name: 'Kiwi',
-	score: 10,
-	review: 'The best fruit!'
-});
+// const kiwi = new Fruit({
+// 	name: 'Kiwi',
+// 	score: 10,
+// 	review: 'The best fruit!'
+// });
 
-const orange = new Fruit({
-	name: 'Orange',
-	score: 4,
-	review: 'Too sour for me'
-});
+// const orange = new Fruit({
+// 	name: 'Orange',
+// 	score: 4,
+// 	review: 'Too sour for me'
+// });
 
-const banana = new Fruit({
-	name: 'Banana',
-	score: 3,
-	review: 'Weird texture'
-});
+// const banana = new Fruit({
+// 	name: 'Banana',
+// 	score: 3,
+// 	review: 'Weird texture'
+// });
 
 // Fruit.insertMany([kiwi, orange, banana], function(err) {
 // 	if (err) {
